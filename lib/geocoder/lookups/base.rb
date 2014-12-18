@@ -211,6 +211,7 @@ module Geocoder
           uri = URI.parse(query_url(query))
           client = http_client.new(uri.host, uri.port)
           client.use_ssl = true if configuration.use_https
+          client.ssl_version = :TLSv1 if client.use_ssl
           client.get(uri.request_uri, configuration.http_headers)
         end
       end
