@@ -13,7 +13,6 @@ end
 
 module Geocoder
   module Lookup
-
     class Base
       def initialize
         @cache = nil
@@ -266,6 +265,7 @@ module Geocoder
           args = args.push(uri.user, uri.password) unless uri.user.nil? or uri.password.nil?
           opts = {}
           opts[:use_ssl] = use_ssl?
+          opts[:ssl_version] = :TLSv1 if use_ssl?
 
           http_client.start(*args, opts) do |client|
             client.get(uri.request_uri, configuration.http_headers)
